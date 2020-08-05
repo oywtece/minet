@@ -94,8 +94,8 @@ The scripts run **much faster** with the **tfrecord** data files.
 We provide **tfrecord_writer.py** which can easily convert csv files to tfrecord files.
 
 Target domain: Movies&TV, Source domain: Books. \
-Target domain data files: Movies_Books_train.tfrecord, Movies_Books_val.tfrecord, Movies_Books_test.tfrecord \
-Source domain data files: Books_train.tfrecord, Books_val.tfrecord, Books_test.tfrecord \
+Target domain data files: Movies_Books_xx.tfrecord (xx is in {train, val, test})\
+Source domain data files: Books_xx.tfrecord (xx is in {train, val, test}) \
 Please refer to the paper for more details about the datasets.
 
 Original Amazon datasets:
