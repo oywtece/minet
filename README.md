@@ -104,8 +104,9 @@ Original Amazon datasets:
 ## Config
 ### Validation and hyperparameter tunining
 train file: xx_train.tfrecord, test file: xx_val.tfrecord \
-Set multiple values for hyperparameters. \ 
+Set multiple values for hyperparameters. \
 Example: eta_range = [0.01, 0.02, 0.05, 0.1, 0.2, 0.5]
+
 ### Testing
 train files: xx_train.tfrecord & xx_val.tfrecord, test file: xx_test.tfrecord \
 Set only 1 value for the optimal hyperparameter found in the validation step. \
