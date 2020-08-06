@@ -116,7 +116,6 @@ Example: eta_range = [0.02]
 * config_amazon.py -- config file
 * ctr_funcs.py -- functions
 * dnn_para_tune.py -- DNN model
-* deepmp_para_tune.py -- DeepMP (Deep Matching and Prediction) model
 * minet_para_tune.py -- MiNet model
 
 ## Run the Code
@@ -126,6 +125,5 @@ Config the hyperparameter ranges in config_amazon.py.
 Run the code
 ```bash
 nohup python dnn_para_tune.py > dnn_[output_file_name].out 2>&1 &
-nohup python deepmp_para_tune.py > deepmp_[output_file_name].out 2>&1 &
 nohup python minet_para_tune.py > minet_[output_file_name].out 2>&1 &
 ```
