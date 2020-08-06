@@ -47,13 +47,6 @@ max_len_per_slot = max_len_per_slot_1
 num_csv_col = num_csv_col_1
 layer_dim = layer_dim_1
 
-## for DeepMP
-user_ft_idx = [0] # excluding the label col; relative idx in the feature cols
-item_ft_idx = [1, 2, 3, 4, 5]
-layer_dim_match = [256, 128]
-alpha_range = [1, 2, 3, 4, 5]
-
-
 n_ft = 841927
 time_style = '%Y-%m-%d %H:%M:%S'
 rnd_seed = 123
@@ -62,7 +55,7 @@ tar_clk_b_ini = 0.0
 src_clk_b_ini = 0.0
 wgt_1 = 1.0
 wgt_2_range = [1.0] # [0.1, 0.3, 0.5, 0.7, 1.0]
-eta_range = [0.01, 0.02, 0.03, 0.04, 0.05] # [0.01, 0.02, 0.05, 0.1]
+eta_range = [0.02] # [0.01, 0.02, 0.05, 0.1]
 inter_dim = 10
 k = 10 # embedding size / number of latent factors
 pool_mode = 'sum'
