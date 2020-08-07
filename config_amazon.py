@@ -64,6 +64,6 @@ kp_prob = 1.0
 output_file_name = '0728_1629' # for model saving
 item_att_hidden_dim = 64
 interest_att_hidden_dim = 64
-n_epoch = 2 # number of times to loop over the whole data sets
+n_epoch = 2 # number of times to loop over the whole data set
 record_step_size = 5000 # record the loss and auc after xx mini-batches
 
