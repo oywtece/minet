@@ -6,7 +6,6 @@ import tensorflow as tf
 # label_col_idx = 0
 #########################
 file_name = sys.argv[1]
-num_csv_col = int(sys.argv[2])
 
 # Converting the values into features
 # _int64 is used for numeric values (e.g., label)
