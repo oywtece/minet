@@ -9,7 +9,7 @@ MiNet jointly models **three types of user interest**: 1) long-term interest acr
 If you use this code, please cite the following paper:
 * **MiNet: Mixed Interest Network for Cross-Domain Click-Through Rate Prediction. In CIKM, ACM, 2020.**
 
-arXiv: xx
+arXiv: https://arxiv.org/abs/2008.02974
 
 #### Bibtex
 ```
