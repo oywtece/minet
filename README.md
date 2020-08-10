@@ -102,7 +102,7 @@ Original Amazon datasets:
 * [Original Amazon datasets](http://jmcauley.ucsd.edu/data/amazon/index_2014.html)
 
 ## Config
-### Validation and hyperparameter tunining
+### Validation and hyperparameter tuning
 train file: xx_train.tfrecord, test file: xx_val.tfrecord \
 Set multiple values for hyperparameters. \
 Example: eta_range = [0.01, 0.02, 0.05, 0.1, 0.2, 0.5]
