@@ -2,10 +2,6 @@
 
 Mixed Interest Network (MiNet) is a model for **cross-domain** click-through rate (CTR) prediction.
 
-A major advantage of cross-domain CTR prediction is that by enriching data across domains, the data sparsity and the cold-start problem in the target domain can be alleviated, which leads to improved prediction performance.
-
-MiNet jointly models **three types of user interest**: 1) long-term interest across domains, 2) short-term interest from the source domain and 3) short-term interest in the target domain. MiNet contains **two levels of attentions,** where the **item-level** attention can adaptively distill useful information from clicked news / ads and the **interest-level** attention can adaptively fuse different interest representations. 
-
 If you use this code, please cite the following paper:
 * **MiNet: Mixed Interest Network for Cross-Domain Click-Through Rate Prediction. In CIKM, ACM, 2020.**
 
