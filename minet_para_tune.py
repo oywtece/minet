@@ -2,7 +2,7 @@
 Tensorflow implementation of MiNet described in:
 [CIKM 2020] MiNet: Mixed Interest Network for Cross-Domain Click-Through Rate Prediction
 
-Code logic: read_config -> load data -> define functions -> define placeholders and variables 
+Code logic: read config -> load data -> define functions -> define placeholders and variables 
 -> define computation graph -> launch computation graph (run session)
 -> train -> test -> print results
 '''
@@ -30,7 +30,6 @@ rnd_seed = cfg.rnd_seed
 n_ft = cfg.n_ft
 k = cfg.k
 kp_prob = cfg.kp_prob
-pool_mode = cfg.pool_mode
 n_epoch = cfg.n_epoch
 record_step_size = cfg.record_step_size
 opt_alg = cfg.opt_alg
@@ -221,7 +220,7 @@ for item in para_list:
         x_input_mul_hot_2 = concat_mul_hot_2[:, 0:max_n_clk_2, :, :]
             
         return x_input_user, x_input_one_hot, x_input_mul_hot, x_input_one_hot_1, x_input_mul_hot_1, \
-            x_input_one_hot_2, x_input_mul_hot_2 
+            x_input_one_hot_2, x_input_mul_hot_2
 
     def partition_input_2(x_input):
         idx_a = n_user_slot
@@ -233,19 +232,7 @@ for item in para_list:
         # shape=[None, n_mul_hot_slot, max_len_per_slot]
         x_input_mul_hot = tf.reshape(x_input_mul_hot, [-1, n_mul_hot_slot_2, max_len_per_slot_2])
         return x_input_user, x_input_one_hot, x_input_mul_hot
-    
-    # count number of valid (i.e., not padded with all 0) clicked ads
-    # output: none*1
-    def count_n_valid_clk(x_input_one_hot_clk):
-        # none * max_n_clk * total_embed_dim
-        data_mask_a = tf.cast(tf.greater(x_input_one_hot_clk, 0), tf.float32)
-        # none * max_n_clk
-        data_mask_a_reduce_sum = tf.reduce_sum(data_mask_a, 2)
-        data_mask_b = tf.cast(tf.greater(data_mask_a_reduce_sum, 0), tf.float32)
-        # none * 1
-        n_valid = 1.0*tf.reduce_sum(data_mask_b, 1, keep_dims=True)
-        return n_valid
-    
+        
     # add mask
     def get_masked_one_hot(x_input_one_hot):
         data_mask = tf.cast(tf.greater(x_input_one_hot, 0), tf.float32)
@@ -324,7 +311,7 @@ for item in para_list:
     # output: (?, total_embed_dim)
     # n_valid: (?, 1)
     def item_level_att_1(data_embed_clk_1, data_embed_1_re, data_embed_user_re, \
-                                pool_mode, x_input_one_hot_clk_1):
+                                x_input_one_hot_clk_1):
         # convert to 2D
         data_embed_clk_1_re = tf.reshape(data_embed_clk_1, [-1, total_embed_dim_1])
         cur_input = tf.concat([data_embed_clk_1_re, data_embed_1_re, data_embed_user_re, \
@@ -335,19 +322,11 @@ for item in para_list:
         
         nlz_wgt_clk_1 = tf.nn.softmax(weight, dim=1)
         data_embed_clk_1_ig = data_embed_clk_1 * nlz_wgt_clk_1
-        
-        # output: (?, total_embed_dim_1)
-        if pool_mode == 'sum':
-            data_embed_agg_1_ig = tf.reduce_sum(data_embed_clk_1_ig, 1)
-        elif pool_mode == 'avg':
-            n_valid_1 = count_n_valid_clk(x_input_one_hot_clk_1)
-            data_embed_agg_1_ig = tf.reduce_sum(data_embed_clk_1_ig, 1) / (n_valid_1 + 1e-5)
-        elif pool_mode == 'max':
-            data_embed_agg_1_ig = tf.reduce_max(data_embed_clk_1_ig, 1)
+        data_embed_agg_1_ig = tf.reduce_sum(data_embed_clk_1_ig, 1)
         return data_embed_agg_1_ig
 
     def item_level_att_2(data_embed_clk_2, data_embed_1_re, data_embed_user_re, \
-                                pool_mode, x_input_one_hot_clk_2):
+                                x_input_one_hot_clk_2):
         data_embed_clk_2_re = tf.reshape(data_embed_clk_2, [-1, total_embed_dim_2])
         # ?, total_embed_dim_2 -> ?, total_embed_dim_1
         temp_mat_ab = tf.matmul(tf.matmul(data_embed_clk_2_re, H_a), H_b)
@@ -359,15 +338,7 @@ for item in para_list:
         
         nlz_wgt_clk_2 = tf.nn.softmax(weight, dim=1)
         data_embed_clk_2_ig = data_embed_clk_2 * nlz_wgt_clk_2
-        
-        # output: (?, total_embed_dim_2)
-        if pool_mode == 'sum':
-            data_embed_agg_2_ig = tf.reduce_sum(data_embed_clk_2_ig, 1)
-        elif pool_mode == 'avg':
-            n_valid_2 = count_n_valid_clk(x_input_one_hot_clk_2)
-            data_embed_agg_2_ig = tf.reduce_sum(data_embed_clk_2_ig, 1) / (n_valid_2 + 1e-5)
-        elif pool_mode == 'max':
-            data_embed_agg_2_ig = tf.reduce_max(data_embed_clk_2_ig, 1)        
+        data_embed_agg_2_ig = tf.reduce_sum(data_embed_clk_2_ig, 1)  
         return data_embed_agg_2_ig
 
     def interest_level_att(data_embed_1, data_embed_user_1, data_embed_clk_1_agg, \
@@ -507,9 +478,9 @@ for item in para_list:
     
     # item-level att
     data_embed_agg_1_ig = item_level_att_1(data_embed_clk_1, data_embed_1_re_1, data_embed_user_1_re_1, \
-                        pool_mode, x_input_one_hot_1)
+                        x_input_one_hot_1)
     data_embed_agg_2_ig = item_level_att_2(data_embed_clk_2, data_embed_1_re_2, data_embed_user_1_re_2, \
-                        pool_mode, x_input_one_hot_2)
+                        x_input_one_hot_2)
 
     # interest-level att
     data_embed_1_final = interest_level_att(data_embed_1, data_embed_user_1, data_embed_agg_1_ig,\
@@ -672,4 +643,3 @@ print(fmt_str.format(*header_row))
 for i in range(len(result_list)):
     tmp = result_list[i]
     print(fmt_str.format(*tmp))
-
