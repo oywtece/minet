@@ -29,7 +29,7 @@ Data is in the "csv" or the "tfrecord" format.
 * In the Amazon example here, the target domain is the Movies&TV and the source domain is the Books.
 * In UC Toutiao, the target domain is the Ads and the source domain is the News.
 
-Assume there are N unique fts across domains (where user fts are shared). Fts need to be indexed from 1 to N. Use 0 for missing values or for padding.
+Assume there are N unique fts across domains (where **user fts are shared**). Fts need to be indexed from 1 to N. Use 0 for missing values or for padding.
 
 We categorize fts as i) **one-hot** or **univalent** (e.g., user id, city) and ii) **mul-hot** or **multivalent** (e.g., words in ad title).
 
