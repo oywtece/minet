@@ -26,6 +26,8 @@ layer_dim_2 = [256, 128, 1]
 input_format = 'tfrecord' # 'csv' or 'tfrecord'
 pre = './data/Movies_Books_'
 suf = '.tfrecord' # '.csv'
+# validation step: train: 'train', test: 'val', xx_range: a set of values
+# testing step: train: 'train'+'val', test: 'test', xx_range: one optimal value found in the validation step
 train_file_name_1 = [pre+'train'+suf, pre+'val'+suf]
 test_file_name_1 = [pre+'test'+suf]
 
