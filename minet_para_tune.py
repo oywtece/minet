@@ -592,13 +592,7 @@ for item in para_list:
         except tf.errors.OutOfRangeError:
             func.print_time()
             print('Done testing 2 -- epoch limit reached')
-        finally:
-            # whether to save the model
-            if save_model_ind == 1:                
-                saver = tf.train.Saver() 
-                save_path = saver.save(sess, model_saving_addr)
-                print("Model saved in file: %s" % save_path)
-                
+        finally:                
             coord.request_stop()
         coord.join(threads) 
         
