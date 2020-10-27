@@ -7,12 +7,15 @@ If you use this code, please cite the following paper:
 
 arXiv: https://arxiv.org/abs/2008.02974
 
+ACM DL: https://dl.acm.org/doi/10.1145/3340531.3412728
+
 #### Bibtex
 ```
 @inproceedings{ouyang2020minet,
   title={MiNet: Mixed Interest Network for Cross-Domain Click-Through Rate Prediction},
   author={Ouyang, Wentao and Zhang, Xiuwu and Zhao, Lei and Luo, Jinmei and Zhang, Yu and Zou, Heng and Liu, Zhaojie and Du, Yanlong},
   booktitle={CIKM},
+  pages={2669--2676},
   year={2020}
 }
 ```
