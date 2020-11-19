@@ -47,7 +47,7 @@ clk_item_id_2_Book, main_cat_2_Book, brand_2_Book, title_2_Book, category_2_Book
 * output: ratings_Books_shared_users_w_meta_idx_format.csv, ratings_Movies_and_TV_shared_users_w_hist_meta_idx_format.csv
   * one example line: 1019865600, 1, 185, 430, 578, 602, 229, ...
 
-### 8) split the dataset according to time_stamp as train / val / test files [**remove time_stamp after data splitting**]
+### 8) split the dataset according to time_stamp as train / val / test files (remove time_stamp after data splitting)
 * input: ratings_Books_shared_users_w_meta_idx_format.csv, ratings_Movies_and_TV_shared_users_w_hist_meta_idx_format.csv
 * output: Books_train.csv, Books_val.csv. Books_test.csv, Movies_Books_train.csv, Movies_Books_val.csv, Movies_Books_test.csv
   * one example line: 1, 185, 430, 578, 602, 229, ...
