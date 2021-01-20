@@ -2,6 +2,8 @@
 
 Mixed Interest Network (MiNet) is a model for **cross-domain** click-through rate (CTR) prediction.
 
+<img src="https://github.com/oywtece/minet/blob/master/minet.png" alt="minet model structure" width="600"/>
+
 If you use this code, please cite the following paper:
 * **MiNet: Mixed Interest Network for Cross-Domain Click-Through Rate Prediction. In CIKM, ACM, 2020.**
 
